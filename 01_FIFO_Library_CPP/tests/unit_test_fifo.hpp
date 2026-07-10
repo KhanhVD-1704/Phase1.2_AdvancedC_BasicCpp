@@ -3,6 +3,8 @@
 
 void TestConstructor();
 
+void TestZeroCapacity();
+
 void TestPush();
 
 void TestPop();

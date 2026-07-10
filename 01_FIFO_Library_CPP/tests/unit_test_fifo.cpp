@@ -1,15 +1,26 @@
 #include "unit_test_fifo.hpp"
 
-#include <cassert>
+#include <cstdlib>
 #include <iostream>
+#include <stdexcept>
 
 #include "fifo.hpp"
 
 using namespace fifo_library;
 
-#define EXPECT_TRUE(expr)      assert(expr)
-#define EXPECT_FALSE(expr)     assert(!(expr))
-#define EXPECT_EQ(a, b)        assert((a) == (b))
+#define EXPECT_TRUE(expr)                                                    \
+    do                                                                       \
+    {                                                                        \
+        if (!(expr))                                                         \
+        {                                                                    \
+            std::cerr << "[FAIL] " << __func__ << ": EXPECT_TRUE("        \
+                      << #expr << ") at line " << __LINE__ << '\n';       \
+            std::exit(EXIT_FAILURE);                                        \
+        }                                                                    \
+    } while (false)
+
+#define EXPECT_FALSE(expr) EXPECT_TRUE(!(expr))
+#define EXPECT_EQ(actual, expected) EXPECT_TRUE((actual) == (expected))
 
 /*====================================================
 =                Constructor Test                    =
@@ -29,6 +40,22 @@ void TestConstructor()
     fifo.DebugPrint();
 
     std::cout << "[PASS] TestConstructor\n";
+}
+
+void TestZeroCapacity()
+{
+    std::cout << "\n========== TestZeroCapacity ==========\n";
+
+    try
+    {
+        FIFO fifo(0);
+        (void)fifo;
+        EXPECT_TRUE(false);
+    }
+    catch (const std::invalid_argument&)
+    {
+        std::cout << "[PASS] TestZeroCapacity\n";
+    }
 }
 
 /*====================================================
@@ -194,6 +221,8 @@ void RunAllTests()
     std::cout << "========== FIFO UNIT TEST ==========\n";
 
     TestConstructor();
+
+    TestZeroCapacity();
 
     TestPush();
 
