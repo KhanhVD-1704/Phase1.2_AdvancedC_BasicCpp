@@ -1,5 +1,5 @@
 #include "fifo.hpp"
-
+#include "algorithm"
 #include <iomanip>
 #include <iostream>
 #include <stdexcept>
@@ -38,6 +38,7 @@ bool FIFO::IsFull() const
 
 void FIFO::Clear()
 {
+    std::fill(buffer_.begin(), buffer_.end(), 0U);
     head_ = 0;
     tail_ = 0;
     count_ = 0;
@@ -68,6 +69,7 @@ bool FIFO::Pop(uint8_t& data)
 
     data = buffer_[tail_];
 
+    buffer_[tail_] = 0U;
     tail_ = (tail_ + 1) % Capacity();
 
     --count_;
