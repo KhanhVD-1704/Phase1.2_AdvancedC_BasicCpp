@@ -1,2 +1,5 @@
-# Executable
+# Build artifacts
 app
+build/
+*.o
+*.d

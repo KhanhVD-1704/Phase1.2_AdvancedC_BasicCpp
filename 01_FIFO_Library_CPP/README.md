@@ -25,6 +25,7 @@ Pop lần lượt  -> 2, 3, 4
 │   ├── unit_test_fifo.hpp
 │   └── unit_test_fifo.cpp
 ├── main.cpp
+├── Makefile
 ├── README.md
 └── output.md
 ```
@@ -97,22 +98,22 @@ Chi tiết kết quả được ghi trong [output.md](output.md).
 
 ## Build và chạy
 
-Mở terminal tại thư mục `01_FIFO_Library_CPP` và biên dịch bằng C++17:
+Mở terminal tại thư mục `01_FIFO_Library_CPP` và build project:
 
 ```bash
-g++ -std=c++17 \
-    main.cpp \
-    tests/unit_test_fifo.cpp \
-    src/fifo.cpp \
-    -Iinclude \
-    -Itests \
-    -o app
+make
 ```
 
 Chạy unit test:
 
 ```bash
-./app
+make test
+```
+
+Xóa kết quả build:
+
+```bash
+make clean
 ```
 
 File `app` là file build cục bộ và đã được khai báo trong `.gitignore`, nên không cần đưa lên GitHub.
