@@ -114,5 +114,3 @@ Xóa kết quả build:
 ```bash
 make clean
 ```
-
-File `app` đã nằm trong `.gitignore`, nên không cần đưa file này lên GitHub.

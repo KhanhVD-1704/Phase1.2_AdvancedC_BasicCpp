@@ -115,5 +115,3 @@ Xóa kết quả build:
 ```bash
 make clean
 ```
-
-File `app` là file build cục bộ và đã được khai báo trong `.gitignore`, nên không cần đưa lên GitHub.
